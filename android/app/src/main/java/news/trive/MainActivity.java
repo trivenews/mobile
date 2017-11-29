@@ -1,4 +1,4 @@
-package news.trive.trive;
+package news.trive;
 
 import android.os.Bundle;
 
