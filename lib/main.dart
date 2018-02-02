@@ -2,37 +2,44 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+// import 'package:fluro/fluro.dart';
+import 'screenshot_preview_screen.dart';
 
+File imageFile;
+void main() {
+  /// App routes
+  final Map<String, WidgetBuilder> appRoutes = <String, WidgetBuilder>{
+    MainScreen.routeName: (BuildContext context) => new MainScreen(
+          key: new GlobalKey<ScaffoldState>(debugLabel: 'MainScreen'),
+          title: 'Trive',
+        ),
+    ScreenShotPreview.routeName: (BuildContext context) =>
+        new ScreenShotPreview(imageFile),
+  };
 
-class TriveApp extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    return new MaterialApp(
-      title: 'Trive',
-      theme: new ThemeData(
+  // final router  = new Router();
+  runApp(new MaterialApp(
+    theme: new ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.grey,
-        accentColor: Colors.orangeAccent[700],
-      ),
-      home: new MyHomePage(title: 'Trive'),
-    );
-  }
+        accentColor: Colors.orangeAccent[700]),
+    routes: appRoutes,
 
+    /// App title, this is different from a screen title.
+    title: "Trive",
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
-
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  static String routeName = '/';
+  MainScreen({Key key, this.title}) : super(key: key);
   final String title;
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MainScreenState createState() => new _MainScreenState();
 }
 
-
-class _MyHomePageState extends State<MyHomePage> {
-  File imageFile;
-
+class _MainScreenState extends State<MainScreen> {
   getImage() async {
     var _fileName = await ImagePicker.pickImage();
     setState(() {
@@ -53,7 +60,11 @@ class _MyHomePageState extends State<MyHomePage> {
             new Center(
               child: imageFile == null
                   ? new Text('No image selected.')
-                  : new Image.file(imageFile),
+                  : new FlatButton(
+                      child: new Text('Proceed'),
+                      onPressed: textF,
+                      color: Colors.green,
+                    ),
             ),
           ],
         ),
@@ -65,9 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-}
 
-
-void main() {
-  runApp(new TriveApp());
+  textF() {
+    Navigator.pushNamed(context, '/screenshots/preview');
+  }
 }
