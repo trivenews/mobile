@@ -1,14 +1,11 @@
-// Copyright 2015 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/material.dart';
 import 'dart:io';
 
 class ScreenShotPreview extends StatefulWidget {
   static const String routeName = '/screenshots/preview';
   final File file;
-  ScreenShotPreview(this.file);
+  ScreenShotPreview([Map<String, dynamic> params = const {}])
+      : file = params['file']?.runtimeType == File ? params['file'] : null;
 
   @override
   ScreenShotPreviewState createState() => new ScreenShotPreviewState(file);
@@ -18,7 +15,7 @@ enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ScreenShotPreviewState extends State<ScreenShotPreview> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
-      new GlobalKey<ScaffoldState>(debugLabel: 'ScreenShotPreview');
+      new Key('ScreenShotsPreview');
   final double _appBarHeight = 256.0;
   File file;
   ScreenShotPreviewState(this.file);
