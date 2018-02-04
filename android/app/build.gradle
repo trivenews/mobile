@@ -14,10 +14,6 @@ if (flutterRoot == null) {
 apply plugin: 'com.android.application'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
-def keystorePropertiesFile = rootProject.file("key.properties")
-def keystoreProperties = new Properties()
-keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-
 android {
     compileSdkVersion 27
 
@@ -35,18 +31,23 @@ android {
     }
 
     signingConfigs {
-        release {
-            keyAlias keystoreProperties['keyAlias']
-            keyPassword keystoreProperties['keyPassword']
-            storeFile file(keystoreProperties['storeFile'])
-            storePassword keystoreProperties['storePassword']
+        if (localProperties['storeFile'] != null) {
+            release {
+                keyAlias localProperties['keyAlias']
+                keyPassword localProperties['keyPassword']
+                storeFile file(localProperties['storeFile'])
+                storePassword localProperties['storePassword']
+            }
         }
     }
 
     buildTypes {
         release {
-            // signingConfig signingConfigs.debug
-            signingConfig signingConfigs.release
+            if (localProperties['storeFile'] != null) {
+                signingConfig signingConfigs.release
+            } else {
+                signingConfig signingConfigs.debug
+            }
         }
     }
 }
