@@ -15,7 +15,7 @@ enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ScreenShotPreviewState extends State<ScreenShotPreview> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
-      new Key('ScreenShotsPreview');
+      new GlobalKey<ScaffoldState>(debugLabel: 'ScreenShotsPreview');
   final double _appBarHeight = 256.0;
   File file;
   ScreenShotPreviewState(this.file);

@@ -18,7 +18,7 @@ class _TriveAppState extends State<TriveApp> {
           brightness: Brightness.dark,
           primarySwatch: Colors.grey,
           accentColor: Colors.orangeAccent[700]),
-      home: appRoutes[Screen.MainScreen](),
+      home: appRoutes[Screen.MainScreen]({'title': 'Trive'}),
 
       /// App title, this is different from a screen title.
       title: "Trive",
