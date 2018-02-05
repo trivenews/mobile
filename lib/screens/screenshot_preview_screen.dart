@@ -14,8 +14,6 @@ class ScreenShotPreview extends StatefulWidget {
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ScreenShotPreviewState extends State<ScreenShotPreview> {
-  static final GlobalKey<ScaffoldState> _scaffoldKey =
-      new GlobalKey<ScaffoldState>(debugLabel: 'ScreenShotsPreview');
   final double _appBarHeight = 256.0;
   File file;
   ScreenShotPreviewState(this.file);
@@ -32,7 +30,6 @@ class ScreenShotPreviewState extends State<ScreenShotPreview> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      key: _scaffoldKey,
       body: new CustomScrollView(
         slivers: <Widget>[
           new SliverAppBar(
