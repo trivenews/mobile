@@ -1,11 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:trive/globals.dart';
 import 'package:trive/routes.dart';
 
 class MainScreen extends StatefulWidget {
   static String routeName = '/';
+  final TriveImagePicker imagePicker;
+
+  /// Depends on [TriveImagePicker]
+  MainScreen(this.imagePicker);
 
   /// Title for the AppBar.
   final String title = 'Trive';
@@ -17,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
   File imageFile;
   _MainScreenState();
   getImage() async {
-    var _fileName = await ImagePicker.pickImage();
+    var _fileName = await widget.imagePicker.pickImage();
     setState(() {
       imageFile = _fileName;
     });
