@@ -6,21 +6,16 @@ import 'package:trive/routes.dart';
 
 class MainScreen extends StatefulWidget {
   static String routeName = '/';
-  final Key key;
-  MainScreen([Map<String, dynamic> params = const {}])
-      : title = params['title']?.toString() ?? 'Trive',
-        key = params['key']?.runtimeType == Key
-            ? params['key']
-            : new Key('MainScreen');
-  final String title;
+
+  /// Title for the AppBar.
+  final String title = 'Trive';
   @override
-  _MainScreenState createState() => new _MainScreenState(key);
+  _MainScreenState createState() => new _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
   File imageFile;
-  Key key;
-  _MainScreenState(this.key);
+  _MainScreenState();
   getImage() async {
     var _fileName = await ImagePicker.pickImage();
     setState(() {
@@ -31,7 +26,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      key: key,
       appBar: new AppBar(
         title: new Text(widget.title),
       ),

@@ -19,7 +19,7 @@ typedef Widget WidgetWithArgs([Map<String, dynamic> params]);
 
 /// App routes
 final Map<Screen, WidgetWithArgs> appRoutes = <Screen, WidgetWithArgs>{
-  Screen.MainScreen: ([Map<String, dynamic> params]) => new MainScreen(params),
+  Screen.MainScreen: ([Map<String, dynamic> params]) => new MainScreen(),
   Screen.ScreenShotPreviewScreen: ([Map<String, dynamic> params]) =>
       new ScreenShotPreview(params),
 };
