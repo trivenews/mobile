@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:trive/main.dart';
-import 'package:trive/routes.dart';
+import 'package:trive/screens/main_screen.dart';
+import 'mocks/image_picker.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(new TriveApp());
+  testWidgets('MainScreen:', (WidgetTester tester) async {
+    /// Build our [MainScreen] and trigger a frame.
+    await tester.pumpWidget(
+        new MaterialApp(home: new MainScreen(new ImagePickerMock())));
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(find.text('No image selected.'), findsOneWidget,
+        reason: 'shows status text before image select');
+    expect(find.text('Proceed'), findsNothing,
+        reason: 'hides proceed before image seelct');
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    /// Tap on the add floating action button.
+    await tester.tap(find.byIcon(Icons.add_a_photo));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Proceed'), findsOneWidget,
+        reason: 'shows proceed after image select');
+    expect(find.text('No image selected.'), findsNothing,
+        reason: 'hides status text after image select');
   });
 }
