@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:trive/screens/main_screen.dart';
+import 'package:trive/screens/screenshot_preview_screen.dart';
 import 'mocks/image_picker.dart';
 
 void main() {
@@ -22,5 +23,11 @@ void main() {
         reason: 'shows proceed after image select');
     expect(find.text('No image selected.'), findsNothing,
         reason: 'hides status text after image select');
+
+    await tester.tap(find.widgetWithText(FlatButton, 'Proceed'));
+    await tester.pump();
+
+    expect(find.byType(ScreenShotPreview, skipOffstage: false), findsOneWidget,
+        reason: 'switches to ScreenShotPreview when clicked on Proceed');
   });
 }
