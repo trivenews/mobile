@@ -1,19 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-// import 'package:fluro/fluro.dart';
 import 'screens/main_screen.dart';
 import 'screens/screenshot_preview_screen.dart';
-
-// final router = new Router();
-
-// var screenshotHandler = new Handler(
-//     handlerFunc: (BuildContext context, Map<String, dynamic> params) =>
-//         new ScreenShotPreview(params['image']));
-
-// /// Define app-wide routes
-// void defineRoutes(Router router) {
-//   router.define(ScreenShotPreview.routeName, handler: screenshotHandler);
-// }
 
 typedef Widget WidgetWithArgs([Map<String, dynamic> params]);
 
