@@ -11,4 +11,5 @@ class TriveImagePicker {
 
 class Globals {
   static TriveImagePicker imagePicker = new TriveImagePicker();
+  static File selectedImageFile;
 }

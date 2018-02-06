@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
+import 'package:trive/globals.dart';
 
 class ScreenShotPreview extends StatefulWidget {
   static const String routeName = '/screenshots/preview';
-  final File file;
-  ScreenShotPreview([Map<String, dynamic> params = const {}])
-      : file = params['file']?.runtimeType == File ? params['file'] : null;
-
+  final File imageFile;
+  ScreenShotPreview([this.imageFile]);
   @override
-  ScreenShotPreviewState createState() => new ScreenShotPreviewState(file);
+  ScreenShotPreviewState createState() => new ScreenShotPreviewState();
 }
 
 enum AppBarBehavior { normal, pinned, floating, snapping }
 
 class ScreenShotPreviewState extends State<ScreenShotPreview> {
   final double _appBarHeight = 256.0;
-  File file;
-  ScreenShotPreviewState(this.file);
 
   Widget showImage() {
+    File file = widget.imageFile ?? Globals.selectedImageFile;
     if (file == null) {
-      return new Text('No image file');
+      return new Center(child: new Text('No image file'));
     }
     return new Image.file(file);
   }

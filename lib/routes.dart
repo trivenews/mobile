@@ -9,7 +9,7 @@ typedef Widget WidgetWithArgs([Map<String, dynamic> params]);
 final Map<Screen, WidgetWithArgs> appRoutes = <Screen, WidgetWithArgs>{
   Screen.MainScreen: ([Map<String, dynamic> params]) => new MainScreen(),
   Screen.ScreenShotPreviewScreen: ([Map<String, dynamic> params]) =>
-      new ScreenShotPreview(params),
+      new ScreenShotPreview(),
 };
 
 enum Screen { MainScreen, ScreenShotPreviewScreen }

@@ -9,7 +9,7 @@ class MainScreen extends StatefulWidget {
   final TriveImagePicker imagePicker;
 
   /// Depends on [TriveImagePicker]
-  MainScreen(this.imagePicker);
+  MainScreen([this.imagePicker]);
 
   /// Title for the AppBar.
   final String title = 'Trive';
@@ -18,12 +18,16 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  File imageFile;
   _MainScreenState();
   getImage() async {
-    var _fileName = await widget.imagePicker.pickImage();
+    File fileName;
+    if (widget.imagePicker != null) {
+      fileName = await widget.imagePicker.pickImage();
+    } else {
+      fileName = await Globals.imagePicker.pickImage();
+    }
     setState(() {
-      imageFile = _fileName;
+      Globals.selectedImageFile = fileName;
     });
   }
 
@@ -38,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             new Center(
-              child: imageFile == null
+              child: Globals.selectedImageFile == null
                   ? new Text('No image selected.')
                   : new FlatButton(
                       child: new Text('Proceed'),
@@ -58,8 +62,9 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   testButton() {
-    Screens.push(context,
-        screenName: Screen.ScreenShotPreviewScreen,
-        params: {'file': imageFile});
+    Screens.push(
+      context,
+      screenName: Screen.ScreenShotPreviewScreen,
+    );
   }
 }
